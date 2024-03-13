@@ -114,14 +114,24 @@ if opt=="Assign Task":
         task = st.text_input("Input your tasks here:","Transport, Design and Documentary, Treasury")
         task = task.split(",")
     with double_col:
-        double_opt = st.selectbox("Double Option:",[True,False])
+        double_opt = st.selectbox("Double Options:",[True,False])
     with assign_btn_col:
         assign_button = st.button("Assign")
     if assign_button:
+        dwn_col, dum1, dum2 = st.columns([3,5,5])
         assign_df = assign_task(name,task,double_opt).set_index('Name')
         st.markdown('\n')
         st.dataframe(assign_df, use_container_width=True)
-
+        #download data
+        with dwn_col:
+            csv = assign_df.to_csv().encode('utf-8')
+            st.download_button(
+            "📄 Download Result",
+            csv,
+            "file.csv",
+            "text/csv",
+            key='download-csv'
+            )
 elif opt=="Assign Group":
     name_col,dum, group_col, dum2, assign_btn_col = st.columns([15,1,10,1,5])
     with name_col:
@@ -132,9 +142,21 @@ elif opt=="Assign Group":
     with assign_btn_col:
         assign_button = st.button("Assign")
     if assign_button:
+        dwn_col, dum1, dum2 = st.columns([3,5,5])
         assign_df = assign_group(name,group)
         st.dataframe(assign_df, use_container_width=True)
 
+        #download data
+        with dwn_col:
+            csv = assign_df.to_csv().encode('utf-8')
+            st.download_button(
+            "📄 Download Result",
+            csv,
+            "file.csv",
+            "text/csv",
+            key='download-csv'
+            )
+            
 elif opt=="Assign Order":
     name_col, assign_btn_col = st.columns([3,1])
     with name_col:
@@ -143,9 +165,21 @@ elif opt=="Assign Order":
     with assign_btn_col:
         assign_button = st.button("Assign")
     if assign_button:
+        dwn_col, dum1, dum2 = st.columns([3,5,5])
         assign_df = random_order(name).set_index('Name')
         st.markdown('\n')
         st.dataframe(assign_df, use_container_width=True)
+
+        #download data
+        with dwn_col:
+            csv = assign_df.to_csv().encode('utf-8')
+            st.download_button(
+            "📄 Download Result",
+            csv,
+            "file.csv",
+            "text/csv",
+            key='download-csv'
+            )
 
 elif opt=="Random Picker":
     name_col, assign_btn_col = st.columns([3,1])
@@ -192,4 +226,3 @@ else:
         st.markdown('\n')
         st.info(f"The number: {pick_number(min_val,max_val)}")
 
-#tutorial
