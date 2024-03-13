@@ -118,11 +118,11 @@ if opt=="Assign Task":
     with assign_btn_col:
         assign_button = st.button("Assign")
     if assign_button:
-        dwn_col, dum1, dum2 = st.columns([3,5,5])
         assign_df = assign_task(name,task,double_opt).set_index('Name')
         st.markdown('\n')
         st.dataframe(assign_df, use_container_width=True)
         #download data
+        dwn_col, dum1, dum2 = st.columns([3,5,5])
         with dwn_col:
             csv = assign_df.to_csv().encode('utf-8')
             st.download_button(
@@ -142,11 +142,10 @@ elif opt=="Assign Group":
     with assign_btn_col:
         assign_button = st.button("Assign")
     if assign_button:
-        dwn_col, dum1, dum2 = st.columns([3,5,5])
         assign_df = assign_group(name,group)
         st.dataframe(assign_df, use_container_width=True)
-
         #download data
+        dwn_col, dum1, dum2 = st.columns([3,5,5])
         with dwn_col:
             csv = assign_df.to_csv().encode('utf-8')
             st.download_button(
@@ -165,12 +164,11 @@ elif opt=="Assign Order":
     with assign_btn_col:
         assign_button = st.button("Assign")
     if assign_button:
-        dwn_col, dum1, dum2 = st.columns([3,5,5])
         assign_df = random_order(name).set_index('Name')
         st.markdown('\n')
         st.dataframe(assign_df, use_container_width=True)
-
         #download data
+        dwn_col, dum1, dum2 = st.columns([3,5,5])
         with dwn_col:
             csv = assign_df.to_csv().encode('utf-8')
             st.download_button(
